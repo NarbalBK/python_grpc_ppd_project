@@ -3,17 +3,17 @@ import logging
 
 import grpc
 
-import helloworld_pb2
-import helloworld_pb2_grpc
+import chat_pb2
+import chat_pb2_grpc
 
-class Greeter(helloworld_pb2_grpc.GreeterServicer):
+class Chat(chat_pb2_grpc.ChatServicer):
 
-    def SayHello(self, request, context):
-        return helloworld_pb2.HelloReply(message='Hello, %s!' % request.name)
+    def SendMessage(self, request, context):
+        return chat_pb2.ChatMessage(name= 'Name: %s' % request.name, message="Message: %s" % request.message)
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-    helloworld_pb2_grpc.add_GreeterServicer_to_server(Greeter(), server)
+    chat_pb2_grpc.add_ChatServicer_to_server(Chat(), server)
     server.add_insecure_port('[::]:50051')
     server.start()
     server.wait_for_termination()

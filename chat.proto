@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package helloworld;
+
+service Chat {
+  rpc SendMessage (ChatMessage) returns (ChatMessage) {}
+}
+
+message ChatMessage {
+  string name = 1;
+  string message = 2;
+}
+

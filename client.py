@@ -3,14 +3,14 @@ import logging
 
 import grpc
 
-import helloworld_pb2
-import helloworld_pb2_grpc
+import chat_pb2
+import chat_pb2_grpc
 
 def run():
     with grpc.insecure_channel('localhost:50051') as channel:
-        stub = helloworld_pb2_grpc.GreeterStub(channel)
-        response = stub.SayHello(helloworld_pb2.HelloRequest(name='you'))
-    print("Greeter client received: " + response.message)
+        stub = chat_pb2_grpc.ChatStub(channel)
+        response = stub.SendMessage(chat_pb2.ChatMessage(name='client', message="fuck you"))
+    print("Chat client received: " + response.name +" - "+ response.message)
 
 if __name__ == '__main__':
     logging.basicConfig()
