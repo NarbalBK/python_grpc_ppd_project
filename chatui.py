@@ -1,6 +1,9 @@
 import tkinter as tk
 
 class Tela:
+
+    chatSend = None
+
     def __init__(self, master):
         master.title("putaria title")
 
@@ -31,7 +34,11 @@ class Tela:
 
     def send(self, event=None):
         print("send")
+        self.chatSend()
         return None
+
+    def setChatSend(self, func):
+        self.chatSend = func
 
     def start_root(self):
         self.master.mainloop()

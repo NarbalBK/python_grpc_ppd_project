@@ -25,22 +25,20 @@ class ChatClient:
         run_grpc_thread.start()
 
         self.ui = Tela(tk.Tk())
+        self.ui.setChatSend(self.send_messages)
         self.ui.start_root()
 
     def run_grpc(self):
-        with grpc.insecure_channel('localhost:50051') as channel:
-            self.stub = chat_pb2_grpc.ChatStub(channel)
+        channel = grpc.insecure_channel('localhost:50051')
+        self.stub = chat_pb2_grpc.ChatStub(channel)
 
-            receive_messages_thread = threading.Thread(target=self.receive_messages, daemon=True)
-            receive_messages_thread.start()
-
-            self.send_messages()
+        receive_messages_thread = threading.Thread(target=self.receive_messages, daemon=True)
+        receive_messages_thread.start()
             
     def send_messages(self):
-         while True:
-            print("[SEND MESSAGE]")
-            self.stub.SendMessage(chat_pb2.ChatMessage(name=self.username, message="fuck you"))
-            time.sleep(2)
+        print("[SEND MESSAGE]")
+        self.stub.SendMessage(chat_pb2.ChatMessage(name=self.username, message="fuck you"))
+           
            
     def receive_messages(self):
         if not self.stub:
