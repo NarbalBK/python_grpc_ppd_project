@@ -15,11 +15,11 @@ _sym_db = _symbol_database.Default()
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='chat.proto',
-  package='helloworld',
+  package='chat',
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\nchat.proto\x12\nhelloworld\",\n\x0b\x43hatMessage\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07message\x18\x02 \x01(\t2I\n\x04\x43hat\x12\x41\n\x0bSendMessage\x12\x17.helloworld.ChatMessage\x1a\x17.helloworld.ChatMessage\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\nchat.proto\x12\x04\x63hat\",\n\x0b\x43hatMessage\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07message\x18\x02 \x01(\t\"\x07\n\x05\x45mpty2i\n\x04\x43hat\x12-\n\x0bSendMessage\x12\x11.chat.ChatMessage\x1a\x0b.chat.Empty\x12\x32\n\x0eReceiveMessage\x12\x0b.chat.Empty\x1a\x11.chat.ChatMessage0\x01\x62\x06proto3'
 )
 
 
@@ -27,21 +27,21 @@ DESCRIPTOR = _descriptor.FileDescriptor(
 
 _CHATMESSAGE = _descriptor.Descriptor(
   name='ChatMessage',
-  full_name='helloworld.ChatMessage',
+  full_name='chat.ChatMessage',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='name', full_name='helloworld.ChatMessage.name', index=0,
+      name='name', full_name='chat.ChatMessage.name', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='message', full_name='helloworld.ChatMessage.message', index=1,
+      name='message', full_name='chat.ChatMessage.message', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -59,38 +59,81 @@ _CHATMESSAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=26,
-  serialized_end=70,
+  serialized_start=20,
+  serialized_end=64,
+)
+
+
+_EMPTY = _descriptor.Descriptor(
+  name='Empty',
+  full_name='chat.Empty',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=66,
+  serialized_end=73,
 )
 
 DESCRIPTOR.message_types_by_name['ChatMessage'] = _CHATMESSAGE
+DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 ChatMessage = _reflection.GeneratedProtocolMessageType('ChatMessage', (_message.Message,), {
   'DESCRIPTOR' : _CHATMESSAGE,
   '__module__' : 'chat_pb2'
-  # @@protoc_insertion_point(class_scope:helloworld.ChatMessage)
+  # @@protoc_insertion_point(class_scope:chat.ChatMessage)
   })
 _sym_db.RegisterMessage(ChatMessage)
+
+Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), {
+  'DESCRIPTOR' : _EMPTY,
+  '__module__' : 'chat_pb2'
+  # @@protoc_insertion_point(class_scope:chat.Empty)
+  })
+_sym_db.RegisterMessage(Empty)
 
 
 
 _CHAT = _descriptor.ServiceDescriptor(
   name='Chat',
-  full_name='helloworld.Chat',
+  full_name='chat.Chat',
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=72,
-  serialized_end=145,
+  serialized_start=75,
+  serialized_end=180,
   methods=[
   _descriptor.MethodDescriptor(
     name='SendMessage',
-    full_name='helloworld.Chat.SendMessage',
+    full_name='chat.Chat.SendMessage',
     index=0,
     containing_service=None,
     input_type=_CHATMESSAGE,
+    output_type=_EMPTY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ReceiveMessage',
+    full_name='chat.Chat.ReceiveMessage',
+    index=1,
+    containing_service=None,
+    input_type=_EMPTY,
     output_type=_CHATMESSAGE,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,

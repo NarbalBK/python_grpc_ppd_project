@@ -1,13 +1,16 @@
 syntax = "proto3";
 
-package helloworld;
+package chat;
 
 service Chat {
-  rpc SendMessage (ChatMessage) returns (ChatMessage) {}
+  rpc SendMessage (ChatMessage) returns (Empty);
+  rpc ReceiveMessage(Empty) returns (stream ChatMessage);
 }
 
 message ChatMessage {
   string name = 1;
   string message = 2;
 }
+
+message Empty {}
 

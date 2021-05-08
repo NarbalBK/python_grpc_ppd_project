@@ -15,8 +15,13 @@ class ChatStub(object):
             channel: A grpc.Channel.
         """
         self.SendMessage = channel.unary_unary(
-                '/helloworld.Chat/SendMessage',
+                '/chat.Chat/SendMessage',
                 request_serializer=chat__pb2.ChatMessage.SerializeToString,
+                response_deserializer=chat__pb2.Empty.FromString,
+                )
+        self.ReceiveMessage = channel.unary_stream(
+                '/chat.Chat/ReceiveMessage',
+                request_serializer=chat__pb2.Empty.SerializeToString,
                 response_deserializer=chat__pb2.ChatMessage.FromString,
                 )
 
@@ -30,17 +35,28 @@ class ChatServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ReceiveMessage(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_ChatServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'SendMessage': grpc.unary_unary_rpc_method_handler(
                     servicer.SendMessage,
                     request_deserializer=chat__pb2.ChatMessage.FromString,
+                    response_serializer=chat__pb2.Empty.SerializeToString,
+            ),
+            'ReceiveMessage': grpc.unary_stream_rpc_method_handler(
+                    servicer.ReceiveMessage,
+                    request_deserializer=chat__pb2.Empty.FromString,
                     response_serializer=chat__pb2.ChatMessage.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'helloworld.Chat', rpc_method_handlers)
+            'chat.Chat', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
@@ -59,8 +75,25 @@ class Chat(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/helloworld.Chat/SendMessage',
+        return grpc.experimental.unary_unary(request, target, '/chat.Chat/SendMessage',
             chat__pb2.ChatMessage.SerializeToString,
+            chat__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ReceiveMessage(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(request, target, '/chat.Chat/ReceiveMessage',
+            chat__pb2.Empty.SerializeToString,
             chat__pb2.ChatMessage.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
