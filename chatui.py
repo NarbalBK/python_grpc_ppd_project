@@ -1,7 +1,7 @@
 import tkinter as tk
 
 class Tela:
-    def __init__(self, master, client):
+    def __init__(self, master):
         master.title("putaria title")
 
         my_msg = tk.StringVar()  # For the messages to be sent.
@@ -25,14 +25,12 @@ class Tela:
         send_button.pack()
 
         self.master = master
-        self.client = client
 
     def renderChatMessages(self, text):
         self.message_list.insert(tk.END, text)
 
     def send(self, event=None):
         print("send")
-        self.client.send_messages()
         return None
 
     def start_root(self):
@@ -66,7 +64,8 @@ class Login:
 
     def send(self, event=None):
         print("SAIR")
-        self.username = self.my_msg.get()+": "
+        if self.my_msg.get() != "":
+            self.username = self.my_msg.get()+": "
         self.end_root()
         return None
 

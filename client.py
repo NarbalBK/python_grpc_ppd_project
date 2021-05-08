@@ -3,15 +3,13 @@ import logging
 
 import grpc
 import threading
-import time
 import tkinter as tk
+import time
 
 from chatui import *
 
 import chat_pb2
 import chat_pb2_grpc
-
-chatClient = None
 
 class ChatClient:
 
@@ -26,7 +24,7 @@ class ChatClient:
         run_grpc_thread = threading.Thread(target=self.run_grpc, daemon=True)
         run_grpc_thread.start()
 
-        self.ui = Tela(tk.Tk(), chatClient)
+        self.ui = Tela(tk.Tk())
         self.ui.start_root()
 
     def run_grpc(self):
@@ -39,8 +37,10 @@ class ChatClient:
             self.send_messages()
             
     def send_messages(self):
-        print("[SEND MESSAGE]")
-        self.stub.SendMessage(chat_pb2.ChatMessage(name=self.username, message="fuck you"))
+         while True:
+            print("[SEND MESSAGE]")
+            self.stub.SendMessage(chat_pb2.ChatMessage(name=self.username, message="fuck you"))
+            time.sleep(2)
            
     def receive_messages(self):
         if not self.stub:
