@@ -24,10 +24,6 @@ class ChatClient:
         run_grpc_thread = threading.Thread(target=self.run_grpc, daemon=True)
         run_grpc_thread.start()
 
-        self.ui = Tela(tk.Tk())
-        self.ui.setChatSend(self.send_messages)
-        self.ui.start_root()
-
     def run_grpc(self):
         channel = grpc.insecure_channel('localhost:50051')
         self.stub = chat_pb2_grpc.ChatStub(channel)
@@ -35,10 +31,9 @@ class ChatClient:
         receive_messages_thread = threading.Thread(target=self.receive_messages, daemon=True)
         receive_messages_thread.start()
             
-    def send_messages(self):
+    def send_messages(self, text=""):
         print("[SEND MESSAGE]")
-        self.stub.SendMessage(chat_pb2.ChatMessage(name=self.username, message="fuck you"))
-           
+        self.stub.SendMessage(chat_pb2.ChatMessage(name=self.username, message=text))
            
     def receive_messages(self):
         if not self.stub:
@@ -50,9 +45,15 @@ class ChatClient:
             if self.ui != None:
                 self.ui.renderChatMessages(message.name +" - "+ message.message)
 
+    def ui_reference(self, exUi):
+        self.ui = exUi
+        self.ui.start_root()
+
 if __name__ == '__main__':
     print("JA CHEGOU O DISCO VOADOR")
     chatClient = ChatClient()
+    ui = Tela(tk.Tk(), chatClient)
+    chatClient.ui_reference(ui)
     
     
     

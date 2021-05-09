@@ -2,13 +2,11 @@ import tkinter as tk
 
 class Tela:
 
-    chatSend = None
-
-    def __init__(self, master):
+    def __init__(self, master, chatController):
         master.title("putaria title")
 
-        my_msg = tk.StringVar()  # For the messages to be sent.
-        my_msg.set("")
+        self.my_msg = tk.StringVar()  # For the messages to be sent.
+        self.my_msg.set("")
 
         message_frame = tk.Frame(master)
         scrollbar = tk.Scrollbar(message_frame)
@@ -18,7 +16,7 @@ class Tela:
         self.message_list.pack()
         message_frame.pack()
 
-        entry_field = tk.Entry(master, textvariable=my_msg, background="gray", width=40)
+        entry_field = tk.Entry(master, textvariable=self.my_msg, background="gray", width=40)
         entry_field.bind("<Return>", self.send)
         entry_field.pack(side=tk.LEFT, fill=tk.BOTH)
         entry_field.pack()
@@ -28,17 +26,16 @@ class Tela:
         send_button.pack()
 
         self.master = master
+        self.chatController = chatController
 
     def renderChatMessages(self, text):
         self.message_list.insert(tk.END, text)
 
     def send(self, event=None):
         print("send")
-        self.chatSend()
+        self.chatController.send_messages(self.my_msg.get())
+        self.my_msg.set("")
         return None
-
-    def setChatSend(self, func):
-        self.chatSend = func
 
     def start_root(self):
         self.master.mainloop()
