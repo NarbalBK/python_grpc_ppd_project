@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkmacosx import Button
 
 class Tela:
 
@@ -16,14 +17,15 @@ class Tela:
         self.message_list.pack()
         message_frame.pack()
 
-        entry_field = tk.Entry(master, textvariable=self.my_msg, background="gray", width=40)
+        input_frame = tk.Frame(master)
+        entry_field = tk.Entry(input_frame, textvariable=self.my_msg, background='gray', width=40)
         entry_field.bind("<Return>", self.send)
         entry_field.pack(side=tk.LEFT, fill=tk.BOTH)
         entry_field.pack()
-
-        send_button = tk.Button(master, bg="blue", fg="white", text="Send", command=self.send)
+        send_button = Button(master, bg="blue", fg="white", text="Enviar", command=self.send)
         send_button.pack(side=tk.RIGHT, fill=tk.BOTH)
         send_button.pack()
+        input_frame.pack()
 
         self.master = master
         self.chatController = chatController
@@ -59,7 +61,7 @@ class Login:
         # entry_field.pack(side=tk.CENTER)
         entry_field.pack()
 
-        send_button = tk.Button(master, bg="blue", fg="white", text="Send", command=self.send)
+        send_button = Button(master, bg="blue", fg="white", text="Ok", command=self.send)
         send_button.pack(side=tk.RIGHT, fill=tk.BOTH)
         send_button.pack()
 
