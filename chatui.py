@@ -53,7 +53,7 @@ class Tela:
 
         lbl_troca = tk.Label(input_menu, text="Você deseja passar o turno?")
         lbl_troca.pack()
-        bt_troca = Button(input_menu, bg="white", fg="black", text="Passar turno!", command=self.empty)
+        bt_troca = Button(input_menu, bg="white", fg="black", text="Passar turno!", command=self.TrocarDeTurno)
         bt_troca.pack()
 
         input_menu.pack() # * * *
@@ -117,6 +117,20 @@ class Tela:
         else:
             if self.bt_branco["state"] != "disabled":
                 self.bt_branco["state"] = "disabled"
+
+    def TurnoAtual(self):
+        print("[UI TURNO ATUAL]")
+        response = self.chatController.TurnoAtual()
+        return response
+
+    def TrocarDeTurno(self):
+        print("[UI TROCAR DE TURNO]")
+        if self.corDoJogador == None:
+            return self.empty()
+        response = self.chatController.TrocarDeTurno(self.corDoJogador)
+        if response:
+            print(self.TurnoAtual())
+
 
     def empty(self, event=None):
         pass

@@ -9,7 +9,8 @@ import chat_pb2_grpc
 
 class Chat(chat_pb2_grpc.ChatServicer):
 
-    coresDisponiveis = [0 , 1]
+    coresDisponiveis = [0 , 1] # 0 = preto e 1 = branco
+    turno = 0 # 0 = preto
 
     def __init__(self):
         self._history = []
@@ -48,6 +49,19 @@ class Chat(chat_pb2_grpc.ChatServicer):
             return chat_pb2.Status(status=True)
         return chat_pb2.Status(status=False)
 
+    def TurnoAtual(self, request, context):
+        print("[TURNO ATUAL]")
+        return chat_pb2.Cor(cor=self.turno)
+
+    def TrocarDeTurno(self, request, context):
+        print("[TROCAR DE TURNO]")
+        if request.cor == self.turno:
+            if request.cor == 0:
+                self.turno = 1
+            if request.cor == 1:
+                self.turno = 0
+            return chat_pb2.Status(status=True)
+        return chat_pb2.Status(status=False)
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))

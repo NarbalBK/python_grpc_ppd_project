@@ -46,7 +46,17 @@ class ChatClient:
         if response.status:
             self.corDoJogador = color
         return response.status
-           
+
+    def TurnoAtual(self):
+        print("[TURNO ATUAL]")
+        response = self.stub.TurnoAtual(chat_pb2.Empty())
+        return response.cor
+
+    def TrocarDeTurno(self, color):
+        print("[TROCA DE TURNO]")
+        response = self.stub.TrocarDeTurno(chat_pb2.Cor(cor=color))
+        return response.status
+
     def receive_messages(self):
         if not self.stub:
             return None

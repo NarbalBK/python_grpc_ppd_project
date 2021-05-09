@@ -7,6 +7,8 @@ service Chat {
   rpc ReceiveMessage(Empty) returns (stream ChatMessage);
   rpc CoresDisponiveis(Empty) returns (Cores);
   rpc ChoiceColor(Cor) returns (Status);
+  rpc TurnoAtual(Empty) returns (Cor);
+  rpc TrocarDeTurno(Cor) returns (Status); 
 }
 
 message ChatMessage {

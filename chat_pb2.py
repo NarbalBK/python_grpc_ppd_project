@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\nchat.proto\x12\x04\x63hat\",\n\x0b\x43hatMessage\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07message\x18\x02 \x01(\t\"\x19\n\x05\x43ores\x12\x10\n\x04\x64\x61ta\x18\x01 \x03(\x05\x42\x02\x10\x01\"\x12\n\x03\x43or\x12\x0b\n\x03\x63or\x18\x01 \x01(\x05\"\x18\n\x06Status\x12\x0e\n\x06status\x18\x01 \x01(\x08\"\x07\n\x05\x45mpty2\xbf\x01\n\x04\x43hat\x12-\n\x0bSendMessage\x12\x11.chat.ChatMessage\x1a\x0b.chat.Empty\x12\x32\n\x0eReceiveMessage\x12\x0b.chat.Empty\x1a\x11.chat.ChatMessage0\x01\x12,\n\x10\x43oresDisponiveis\x12\x0b.chat.Empty\x1a\x0b.chat.Cores\x12&\n\x0b\x43hoiceColor\x12\t.chat.Cor\x1a\x0c.chat.Statusb\x06proto3'
+  serialized_pb=b'\n\nchat.proto\x12\x04\x63hat\",\n\x0b\x43hatMessage\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07message\x18\x02 \x01(\t\"\x19\n\x05\x43ores\x12\x10\n\x04\x64\x61ta\x18\x01 \x03(\x05\x42\x02\x10\x01\"\x12\n\x03\x43or\x12\x0b\n\x03\x63or\x18\x01 \x01(\x05\"\x18\n\x06Status\x12\x0e\n\x06status\x18\x01 \x01(\x08\"\x07\n\x05\x45mpty2\x8f\x02\n\x04\x43hat\x12-\n\x0bSendMessage\x12\x11.chat.ChatMessage\x1a\x0b.chat.Empty\x12\x32\n\x0eReceiveMessage\x12\x0b.chat.Empty\x1a\x11.chat.ChatMessage0\x01\x12,\n\x10\x43oresDisponiveis\x12\x0b.chat.Empty\x1a\x0b.chat.Cores\x12&\n\x0b\x43hoiceColor\x12\t.chat.Cor\x1a\x0c.chat.Status\x12$\n\nTurnoAtual\x12\x0b.chat.Empty\x1a\t.chat.Cor\x12(\n\rTrocarDeTurno\x12\t.chat.Cor\x1a\x0c.chat.Statusb\x06proto3'
 )
 
 
@@ -237,7 +237,7 @@ _CHAT = _descriptor.ServiceDescriptor(
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
   serialized_start=149,
-  serialized_end=340,
+  serialized_end=420,
   methods=[
   _descriptor.MethodDescriptor(
     name='SendMessage',
@@ -273,6 +273,26 @@ _CHAT = _descriptor.ServiceDescriptor(
     name='ChoiceColor',
     full_name='chat.Chat.ChoiceColor',
     index=3,
+    containing_service=None,
+    input_type=_COR,
+    output_type=_STATUS,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='TurnoAtual',
+    full_name='chat.Chat.TurnoAtual',
+    index=4,
+    containing_service=None,
+    input_type=_EMPTY,
+    output_type=_COR,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='TrocarDeTurno',
+    full_name='chat.Chat.TrocarDeTurno',
+    index=5,
     containing_service=None,
     input_type=_COR,
     output_type=_STATUS,
