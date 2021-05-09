@@ -8,6 +8,9 @@ import chat_pb2
 import chat_pb2_grpc
 
 class Chat(chat_pb2_grpc.ChatServicer):
+
+    coresDisponiveis = [0 , 1]
+
     def __init__(self):
         self._history = []
         self.last_index = 1
@@ -32,6 +35,11 @@ class Chat(chat_pb2_grpc.ChatServicer):
                 yield message
             # Add a little sleep to reduce the load on the server by constantly checking new messages
             time.sleep(0.02)
+
+    def CoresDisponiveis(self, request, context):
+        print("[CORES DISPONOVEIS]")
+        response = chat_pb2.Cores(data=self.coresDisponiveis)
+        return response
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))

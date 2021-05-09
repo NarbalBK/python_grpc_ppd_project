@@ -33,6 +33,11 @@ class ChatClient:
     def send_messages(self, text=""):
         print("[SEND MESSAGE]")
         self.stub.SendMessage(chat_pb2.ChatMessage(name=self.username, message=text))
+
+    def cores_disponiveis(self):
+        print("[CORES DISPONIVEIS]")
+        response = self.stub.CoresDisponiveis(chat_pb2.Empty())
+        return response.data
            
     def receive_messages(self):
         if not self.stub:

@@ -5,11 +5,16 @@ package chat;
 service Chat {
   rpc SendMessage (ChatMessage) returns (Empty);
   rpc ReceiveMessage(Empty) returns (stream ChatMessage);
+  rpc CoresDisponiveis(Empty) returns (Cores);
 }
 
 message ChatMessage {
   string name = 1;
   string message = 2;
+}
+
+message Cores {
+  repeated int32 data = 1 [packed=true];
 }
 
 message Empty {}
