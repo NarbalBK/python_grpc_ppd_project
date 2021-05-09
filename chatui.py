@@ -1,5 +1,4 @@
 import tkinter as tk
-from tkinter.constants import BOTH
 from tkmacosx import Button
 
 class Tela:
@@ -35,6 +34,27 @@ class Tela:
 
         input_frame.pack() # * * *
 
+        input_menu = tk.Frame(chat_frame, width=20, height=20) # * * *
+
+        lbl_cor = tk.Label(input_menu, text="Com qual cor você deseja jogar?")
+        lbl_cor.pack()
+
+        frame_button = tk.Frame(input_menu) # * *
+        bt_preto = Button(frame_button, bg="white", fg="black", text="Preto", command=self.empty)
+        bt_branco = Button(frame_button, bg="white", fg="black", text="Branco", command=self.empty)
+        bt_preto.pack(side=tk.RIGHT, fill=tk.BOTH)
+        bt_branco.pack(side=tk.LEFT, fill=tk.BOTH)
+        bt_preto.pack()
+        bt_branco.pack()
+        frame_button.pack() # * *
+
+        lbl_troca = tk.Label(input_menu, text="Você deseja passar o turno?")
+        lbl_troca.pack()
+        bt_troca = Button(input_menu, bg="white", fg="black", text="Passar turno!", command=self.empty)
+        bt_troca.pack()
+
+        input_menu.pack() # * * *
+
         chat_frame.pack(side=tk.LEFT, fill=tk.BOTH)
         chat_frame.pack()  # * * * *
 
@@ -62,6 +82,9 @@ class Tela:
 
     def start_root(self):
         self.master.mainloop()
+
+    def empty(self, event=None):
+        pass
 
 class Login:
 
