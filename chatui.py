@@ -1,31 +1,52 @@
 import tkinter as tk
+from tkinter.constants import BOTH
 from tkmacosx import Button
 
 class Tela:
 
     def __init__(self, master, chatController):
         master.title("putaria title")
+        master.geometry("1080x600")
 
         self.my_msg = tk.StringVar()  # For the messages to be sent.
         self.my_msg.set("")
 
-        message_frame = tk.Frame(master)
+        chat_frame = tk.Frame(master, width=200, height=800) #* * * *
+
+        message_frame = tk.Frame(chat_frame) # * * *
+
         scrollbar = tk.Scrollbar(message_frame)
-        self.message_list = tk.Listbox(message_frame, height=15, width=50, yscrollcommand=scrollbar.set)
+        self.message_list = tk.Listbox(message_frame, width=52, height=25, yscrollcommand=scrollbar.set)
         scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         self.message_list.pack(side=tk.LEFT, fill=tk.BOTH)
         self.message_list.pack()
-        message_frame.pack()
 
-        input_frame = tk.Frame(master)
+        message_frame.pack() # * * *
+
+        input_frame = tk.Frame(chat_frame) # * * *
+
         entry_field = tk.Entry(input_frame, textvariable=self.my_msg, background='gray', width=40)
         entry_field.bind("<Return>", self.send)
-        entry_field.pack(side=tk.LEFT, fill=tk.BOTH)
+        entry_field.pack(side=tk.LEFT)
         entry_field.pack()
-        send_button = Button(master, bg="blue", fg="white", text="Enviar", command=self.send)
-        send_button.pack(side=tk.RIGHT, fill=tk.BOTH)
+        send_button = Button(input_frame, bg="blue", fg="white", text="Enviar", command=self.send)
+        send_button.pack(side=tk.RIGHT)
         send_button.pack()
-        input_frame.pack()
+
+        input_frame.pack() # * * *
+
+        chat_frame.pack(side=tk.LEFT, fill=tk.BOTH)
+        chat_frame.pack()  # * * * *
+
+        imgBlank = tk.PhotoImage(file="./img/semBolinha.gif")
+
+        tabuleiro = tk.Frame(master, width=1000, height=800) # * * * *
+        for i in range(8):
+            for j in range(8):
+                bt = Button(tabuleiro, bg="gray", fg="gray", image=imgBlank).place(x=i*80, y=j*70)
+        tabuleiro.pack(side=tk.RIGHT, fill=tk.BOTH)
+
+        tabuleiro.pack() # * * * *
 
         self.master = master
         self.chatController = chatController
@@ -48,11 +69,12 @@ class Login:
 
     def __init__(self, master):
         master.title("putaria login")
+        master.geometry("200x200")
 
         self.my_msg = tk.StringVar()
         self.my_msg.set("")
 
-        login_frame = tk.Frame(master, height=50, width=50)
+        login_frame = tk.Frame(master, height=100, width=100)
         login_frame.pack()
         lbl = tk.Label(login_frame, text="Insira o seu apelido")
         lbl.pack()

@@ -4,7 +4,6 @@ import logging
 import grpc
 import threading
 import tkinter as tk
-import time
 
 from chatui import *
 
