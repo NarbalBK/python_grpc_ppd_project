@@ -15,6 +15,7 @@ class ChatClient:
     ui = None
     stub = None
     username = None
+    corDoJogador = None
 
     def __init__(self):
         logging.basicConfig()
@@ -38,6 +39,13 @@ class ChatClient:
         print("[CORES DISPONIVEIS]")
         response = self.stub.CoresDisponiveis(chat_pb2.Empty())
         return response.data
+
+    def choice_color(self, color):
+        print("[CHOICE COLOR]")
+        response = self.stub.ChoiceColor(chat_pb2.Cor(cor=color))
+        if response.status:
+            self.corDoJogador = color
+        return response.status
            
     def receive_messages(self):
         if not self.stub:

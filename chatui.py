@@ -1,7 +1,10 @@
+from logging import disable
 import tkinter as tk
 from tkmacosx import Button
 
 class Tela:
+
+    corDoJogador = None
 
     def __init__(self, master, chatController):
         master.title("putaria title")
@@ -40,8 +43,8 @@ class Tela:
         lbl_cor.pack()
 
         frame_button = tk.Frame(input_menu) # * *
-        self.bt_preto = Button(frame_button, bg="white", fg="black", text="Preto", command=self.empty)
-        self.bt_branco = Button(frame_button, bg="white", fg="black", text="Branco", command=self.empty)
+        self.bt_preto = Button(frame_button, bg="white", fg="black", text="Preto", command=lambda: self.sendColorChoice(0))
+        self.bt_branco = Button(frame_button, bg="white", fg="black", text="Branco", command=lambda: self.sendColorChoice(1))
         self.bt_preto.pack(side=tk.RIGHT, fill=tk.BOTH)
         self.bt_branco.pack(side=tk.LEFT, fill=tk.BOTH)
         self.bt_preto.pack()
@@ -71,7 +74,7 @@ class Tela:
         self.master = master
         self.chatController = chatController
 
-        self.button_activation()
+        self.buttonActivation()
 
     def renderChatMessages(self, text):
         self.message_list.insert(tk.END, text)
@@ -85,19 +88,35 @@ class Tela:
     def start_root(self):
         self.master.mainloop()
 
-    def button_activation(self):
+    def sendColorChoice(self, color):
+        print("[SEND COLOR CHOICE]")
+        response = self.chatController.choice_color(color)
+        print(response)
+        if response:
+            self.buttonActivation()
+            if color == 0:
+                self.bt_branco["state"] = "disabled"
+            if color == 1:
+                self.bt_preto["state"] = "disabled"
+            self.corDoJogador = color
+
+    def buttonActivation(self):
         print("[BUTTON ACTIVATION]")
         coresDisponiveis = self.chatController.cores_disponiveis()
         print(coresDisponiveis)
         if 0 in coresDisponiveis:
-            self.bt_preto["state"] = "normal"
+            if self.bt_preto["state"] != "normal":
+                self.bt_preto["state"] = "normal"
         else:
-            self.bt_preto["state"] = "disabled"
+            if self.bt_preto["state"] != "disabled":
+                self.bt_preto["state"] = "disabled"
 
         if 1 in coresDisponiveis:
-            self.bt_branco["state"] = "normal"
+            if self.bt_branco["state"] != "normal":
+                self.bt_branco["state"] = "normal"
         else:
-            self.bt_branco["state"] = "disabled"
+            if self.bt_branco["state"] != "disabled":
+                self.bt_branco["state"] = "disabled"
 
     def empty(self, event=None):
         pass

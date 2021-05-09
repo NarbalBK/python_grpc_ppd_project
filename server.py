@@ -41,6 +41,14 @@ class Chat(chat_pb2_grpc.ChatServicer):
         response = chat_pb2.Cores(data=self.coresDisponiveis)
         return response
 
+    def ChoiceColor(self, request, context):
+        print("[CHOICE COLOR]")
+        if request.cor in self.coresDisponiveis:
+            self.coresDisponiveis.remove(request.cor)
+            return chat_pb2.Status(status=True)
+        return chat_pb2.Status(status=False)
+
+
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     chat_pb2_grpc.add_ChatServicer_to_server(Chat(), server)

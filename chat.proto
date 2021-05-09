@@ -6,6 +6,7 @@ service Chat {
   rpc SendMessage (ChatMessage) returns (Empty);
   rpc ReceiveMessage(Empty) returns (stream ChatMessage);
   rpc CoresDisponiveis(Empty) returns (Cores);
+  rpc ChoiceColor(Cor) returns (Status);
 }
 
 message ChatMessage {
@@ -15,6 +16,14 @@ message ChatMessage {
 
 message Cores {
   repeated int32 data = 1 [packed=true];
+}
+
+message Cor {
+  int32 cor = 1;
+}
+
+message Status {
+  bool status = 1;
 }
 
 message Empty {}

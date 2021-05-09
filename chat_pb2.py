@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\nchat.proto\x12\x04\x63hat\",\n\x0b\x43hatMessage\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07message\x18\x02 \x01(\t\"\x19\n\x05\x43ores\x12\x10\n\x04\x64\x61ta\x18\x01 \x03(\x05\x42\x02\x10\x01\"\x07\n\x05\x45mpty2\x97\x01\n\x04\x43hat\x12-\n\x0bSendMessage\x12\x11.chat.ChatMessage\x1a\x0b.chat.Empty\x12\x32\n\x0eReceiveMessage\x12\x0b.chat.Empty\x1a\x11.chat.ChatMessage0\x01\x12,\n\x10\x43oresDisponiveis\x12\x0b.chat.Empty\x1a\x0b.chat.Coresb\x06proto3'
+  serialized_pb=b'\n\nchat.proto\x12\x04\x63hat\",\n\x0b\x43hatMessage\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07message\x18\x02 \x01(\t\"\x19\n\x05\x43ores\x12\x10\n\x04\x64\x61ta\x18\x01 \x03(\x05\x42\x02\x10\x01\"\x12\n\x03\x43or\x12\x0b\n\x03\x63or\x18\x01 \x01(\x05\"\x18\n\x06Status\x12\x0e\n\x06status\x18\x01 \x01(\x08\"\x07\n\x05\x45mpty2\xbf\x01\n\x04\x43hat\x12-\n\x0bSendMessage\x12\x11.chat.ChatMessage\x1a\x0b.chat.Empty\x12\x32\n\x0eReceiveMessage\x12\x0b.chat.Empty\x1a\x11.chat.ChatMessage0\x01\x12,\n\x10\x43oresDisponiveis\x12\x0b.chat.Empty\x1a\x0b.chat.Cores\x12&\n\x0b\x43hoiceColor\x12\t.chat.Cor\x1a\x0c.chat.Statusb\x06proto3'
 )
 
 
@@ -96,6 +96,70 @@ _CORES = _descriptor.Descriptor(
 )
 
 
+_COR = _descriptor.Descriptor(
+  name='Cor',
+  full_name='chat.Cor',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='cor', full_name='chat.Cor.cor', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=93,
+  serialized_end=111,
+)
+
+
+_STATUS = _descriptor.Descriptor(
+  name='Status',
+  full_name='chat.Status',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='status', full_name='chat.Status.status', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=113,
+  serialized_end=137,
+)
+
+
 _EMPTY = _descriptor.Descriptor(
   name='Empty',
   full_name='chat.Empty',
@@ -116,12 +180,14 @@ _EMPTY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=93,
-  serialized_end=100,
+  serialized_start=139,
+  serialized_end=146,
 )
 
 DESCRIPTOR.message_types_by_name['ChatMessage'] = _CHATMESSAGE
 DESCRIPTOR.message_types_by_name['Cores'] = _CORES
+DESCRIPTOR.message_types_by_name['Cor'] = _COR
+DESCRIPTOR.message_types_by_name['Status'] = _STATUS
 DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -138,6 +204,20 @@ Cores = _reflection.GeneratedProtocolMessageType('Cores', (_message.Message,), {
   # @@protoc_insertion_point(class_scope:chat.Cores)
   })
 _sym_db.RegisterMessage(Cores)
+
+Cor = _reflection.GeneratedProtocolMessageType('Cor', (_message.Message,), {
+  'DESCRIPTOR' : _COR,
+  '__module__' : 'chat_pb2'
+  # @@protoc_insertion_point(class_scope:chat.Cor)
+  })
+_sym_db.RegisterMessage(Cor)
+
+Status = _reflection.GeneratedProtocolMessageType('Status', (_message.Message,), {
+  'DESCRIPTOR' : _STATUS,
+  '__module__' : 'chat_pb2'
+  # @@protoc_insertion_point(class_scope:chat.Status)
+  })
+_sym_db.RegisterMessage(Status)
 
 Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), {
   'DESCRIPTOR' : _EMPTY,
@@ -156,8 +236,8 @@ _CHAT = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=103,
-  serialized_end=254,
+  serialized_start=149,
+  serialized_end=340,
   methods=[
   _descriptor.MethodDescriptor(
     name='SendMessage',
@@ -186,6 +266,16 @@ _CHAT = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_EMPTY,
     output_type=_CORES,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ChoiceColor',
+    full_name='chat.Chat.ChoiceColor',
+    index=3,
+    containing_service=None,
+    input_type=_COR,
+    output_type=_STATUS,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
