@@ -88,9 +88,10 @@ class Tela:
 
     def tabuleiroActions(self, pos):
         print("[TABULEIRO ACTIONS]")
-        response = self.chatController.ChangeTabuleiro(self.corDoJogador, pos)
-        if response:
-            self.renderTabuleiro()
+        if self.corDoJogador == self.TurnoAtual():
+            response = self.chatController.ChangeTabuleiro(self.corDoJogador, pos)
+            if response:
+                self.renderTabuleiro()
 
     def TabuleiroAtual(self):
         print("[UI TABULEIRO ATUAL]")
