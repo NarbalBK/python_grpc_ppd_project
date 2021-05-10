@@ -9,7 +9,7 @@ class Tela:
     qtdPretas = 0
 
     def __init__(self, master, chatController):
-        master.title("putaria title")
+        master.title("NOVO JOGO")
         master.geometry("1080x600")
 
         self.my_msg = tk.StringVar()  # For the messages to be sent.
@@ -85,6 +85,7 @@ class Tela:
 
         self.buttonActivation()
         self.renderTabuleiro()
+        self.chatController.send_messages("ENTROU NA SALA...")
 
     def tabuleiroActions(self, pos):
         print("[TABULEIRO ACTIONS]")
@@ -176,24 +177,30 @@ class Login:
     username = "anonimo: "
 
     def __init__(self, master):
-        master.title("putaria login")
-        master.geometry("200x200")
+        master.title("LOGIN")
+        master.geometry("300x200")
 
         self.my_msg = tk.StringVar()
         self.my_msg.set("")
 
-        login_frame = tk.Frame(master, height=100, width=100)
-        login_frame.pack()
+        login_frame = tk.Frame(master, height=200, width=200)
+        
+        lblApresentacao = tk.Label(login_frame, text="BEM VINDO AO OTHELLO")
+        lblApresentacao.pack(padx=10, pady=10)
+        lblApresentacao.pack()
         lbl = tk.Label(login_frame, text="Insira o seu apelido")
+        lbl.pack(padx=10, pady=10)
         lbl.pack()
-        entry_field = tk.Entry(master, textvariable=self.my_msg, background="gray", width=40)
+
+        entry_field = tk.Entry(login_frame, textvariable=self.my_msg, background="gray", width=30)
         entry_field.bind("<Return>", self.send)
-        # entry_field.pack(side=tk.CENTER)
+        entry_field.pack(side=tk.LEFT, fill=tk.BOTH)
         entry_field.pack()
 
-        send_button = Button(master, bg="blue", fg="white", text="Ok", command=self.send)
+        send_button = Button(login_frame, bg="blue", fg="white", text="Ok", command=self.send)
         send_button.pack(side=tk.RIGHT, fill=tk.BOTH)
         send_button.pack()
+        login_frame.pack()
 
         self.master = master
         self.master.mainloop()

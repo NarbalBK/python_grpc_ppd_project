@@ -85,9 +85,9 @@ class ChatClient:
 
         print("[RECEIVE MESSAGE]")
         for message in self.stub.ReceiveMessage(chat_pb2.Empty()):
-            print("Chat client received: " +message.name +" - "+ message.message)
+            print("Chat client received: " +message.name +" "+ message.message)
             if self.ui != None:
-                self.ui.renderChatMessages(message.name +" - "+ message.message)
+                self.ui.renderChatMessages(message.name +" "+ message.message)
 
     def RefreshTabuleiro(self):
         if not self.stub:
