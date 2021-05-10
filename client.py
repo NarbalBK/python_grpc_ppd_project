@@ -103,7 +103,7 @@ class ChatClient:
         self.ui.start_root()
 
 if __name__ == '__main__':
-    print("JA CHEGOU O DISCO VOADOR")
+    print("[MAIN]")
     chatClient = ChatClient()
     ui = Tela(tk.Tk(), chatClient)
     chatClient.ui_reference(ui)

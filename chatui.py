@@ -10,7 +10,7 @@ class Tela:
 
     def __init__(self, master, chatController):
         master.title("NOVO JOGO")
-        master.geometry("1080x600")
+        master.geometry("1200x600")
 
         self.my_msg = tk.StringVar()  # For the messages to be sent.
         self.my_msg.set("")
@@ -20,7 +20,7 @@ class Tela:
         message_frame = tk.Frame(chat_frame) # * * *
 
         scrollbar = tk.Scrollbar(message_frame)
-        self.message_list = tk.Listbox(message_frame, width=52, height=25, yscrollcommand=scrollbar.set)
+        self.message_list = tk.Listbox(message_frame, width=52, height=15, yscrollcommand=scrollbar.set)
         scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         self.message_list.pack(side=tk.LEFT, fill=tk.BOTH)
         self.message_list.pack()
@@ -51,16 +51,19 @@ class Tela:
         self.bt_branco.pack(side=tk.LEFT, fill=tk.BOTH)
         self.bt_preto.pack()
         self.bt_branco.pack()
+        frame_button.pack(pady=10) 
         frame_button.pack() # * *
 
         lbl_troca = tk.Label(input_menu, text="Você deseja passar o turno?")
         lbl_troca.pack()
         bt_troca = Button(input_menu, bg="white", fg="black", text="Passar turno!", command=self.TrocarDeTurno)
+        bt_troca.pack(pady=10)
         bt_troca.pack()
 
-        input_menu.pack() # * * *
+        input_menu.pack(pady=10)
+        input_menu.pack()# * * *
 
-        chat_frame.pack(side=tk.LEFT, fill=tk.BOTH)
+        chat_frame.pack(side=tk.LEFT, fill=tk.BOTH, padx=20, pady=20)
         chat_frame.pack()  # * * * *
 
         self.imgBlank = tk.PhotoImage(file="./img/semBolinha.gif")
@@ -76,7 +79,7 @@ class Tela:
                 tb_buttons_line[j].place(x=i*80, y=j*70)
             self.mtx_tb_buttons.append(tb_buttons_line)
             tb_buttons_line = []
-        tabuleiro.pack(side=tk.RIGHT, fill=tk.BOTH)
+        tabuleiro.pack(side=tk.RIGHT, fill=tk.BOTH, padx=20, pady=20)
 
         tabuleiro.pack() # * * * *
             
@@ -178,7 +181,7 @@ class Login:
 
     def __init__(self, master):
         master.title("LOGIN")
-        master.geometry("300x200")
+        master.geometry("350x200")
 
         self.my_msg = tk.StringVar()
         self.my_msg.set("")
@@ -200,7 +203,7 @@ class Login:
         send_button = Button(login_frame, bg="blue", fg="white", text="Ok", command=self.send)
         send_button.pack(side=tk.RIGHT, fill=tk.BOTH)
         send_button.pack()
-        login_frame.pack()
+        login_frame.pack(padx=20, pady=20)
 
         self.master = master
         self.master.mainloop()
