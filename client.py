@@ -71,6 +71,12 @@ class ChatClient:
             response.line8]
         return tabuleiro
 
+    def ChangeTabuleiro(self, color, pos):
+        print("[CHANGE TABULEIRO]")
+        response = self.stub.ChangeTabuleiro(chat_pb2.Pos(cor=color, pos=pos))
+        return response.status
+
+
     def receive_messages(self):
         if not self.stub:
             return None

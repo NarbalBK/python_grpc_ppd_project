@@ -10,6 +10,7 @@ service Chat {
   rpc TurnoAtual(Empty) returns (Cor);
   rpc TrocarDeTurno(Cor) returns (Status); 
   rpc TabuleiroAtual(Empty) returns (Tabuleiro);
+  rpc ChangeTabuleiro(Pos) returns (Status);
 }
 
 message ChatMessage {
@@ -27,6 +28,11 @@ message Cor {
 
 message Status {
   bool status = 1;
+}
+
+message Pos {
+  int32 cor = 1;
+  repeated int32 pos = 2 [packed=true];
 }
 
 message Tabuleiro {

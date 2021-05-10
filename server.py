@@ -75,6 +75,13 @@ class Chat(chat_pb2_grpc.ChatServicer):
             line7=self.tabuleiro[6],
             line8=self.tabuleiro[7])
 
+    def ChangeTabuleiro(self, request, context):
+        print("[CHANGE TABULEIRO]")
+        pos = request.pos
+        color = request.cor
+        self.tabuleiro[pos[0]][pos[1]] = color
+        return chat_pb2.Status(status=True)
+
     def make_tabuleiro(self):
         mtx_tabuleiro = []
         tb_line = []

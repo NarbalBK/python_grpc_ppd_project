@@ -4,7 +4,7 @@ from functools import partial
 
 class Tela:
 
-    corDoJogador = None
+    corDoJogador = -1
     qtdBrancas = 0
     qtdPretas = 0
 
@@ -72,7 +72,7 @@ class Tela:
         tb_buttons_line = []
         for i in range(8):
             for j in range(8):
-                tb_buttons_line.append(Button(tabuleiro, bg="gray", fg="gray", image=self.imgBlank, command=partial(self.tabuleiroActions, [j, i])))
+                tb_buttons_line.append(Button(tabuleiro, bg="gray", fg="gray", image=self.imgBlank, command=partial(self.tabuleiroActions, [i, j])))
                 tb_buttons_line[j].place(x=i*80, y=j*70)
             self.mtx_tb_buttons.append(tb_buttons_line)
             tb_buttons_line = []
@@ -88,7 +88,9 @@ class Tela:
 
     def tabuleiroActions(self, pos):
         print("[TABULEIRO ACTIONS]")
-        print(pos)
+        response = self.chatController.ChangeTabuleiro(self.corDoJogador, pos)
+        if response:
+            self.renderTabuleiro()
 
     def TabuleiroAtual(self):
         print("[UI TABULEIRO ATUAL]")
@@ -159,7 +161,7 @@ class Tela:
 
     def TrocarDeTurno(self):
         print("[UI TROCAR DE TURNO]")
-        if self.corDoJogador == None:
+        if self.corDoJogador == -1:
             return self.empty()
         response = self.chatController.TrocarDeTurno(self.corDoJogador)
         if response:
