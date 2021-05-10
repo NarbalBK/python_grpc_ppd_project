@@ -106,9 +106,9 @@ class Tela:
         tabuleiro = self.TabuleiroAtual()
         for i in range(8):
             for j in range(8):
-                if tabuleiro[i][j] == -1:
-                    self.mtx_tb_buttons[i][j]["image"] = self.imgBlank
-                elif tabuleiro[i][j] == 0:
+                # if tabuleiro[i][j] == -1:
+                #     self.mtx_tb_buttons[i][j]["image"] = self.imgBlank
+                if tabuleiro[i][j] == 0:
                     self.mtx_tb_buttons[i][j]["image"] = self.imgBlack
                     self.qtdPretas += 1
                 elif tabuleiro[i][j] == 1:

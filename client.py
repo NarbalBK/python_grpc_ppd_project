@@ -30,6 +30,9 @@ class ChatClient:
 
         receive_messages_thread = threading.Thread(target=self.receive_messages, daemon=True)
         receive_messages_thread.start()
+
+        refresh_tabuleiro_thread = threading.Thread(target=self.RefreshTabuleiro, daemon=True)
+        refresh_tabuleiro_thread.start()
             
     def send_messages(self, text=""):
         print("[SEND MESSAGE]")
@@ -76,7 +79,6 @@ class ChatClient:
         response = self.stub.ChangeTabuleiro(chat_pb2.Pos(cor=color, pos=pos))
         return response.status
 
-
     def receive_messages(self):
         if not self.stub:
             return None
@@ -86,6 +88,15 @@ class ChatClient:
             print("Chat client received: " +message.name +" - "+ message.message)
             if self.ui != None:
                 self.ui.renderChatMessages(message.name +" - "+ message.message)
+
+    def RefreshTabuleiro(self):
+        if not self.stub:
+            return None
+
+        print("[REFRESH TABULEIRO]")
+        for message in self.stub.RefreshTabuleiro(chat_pb2.Empty()):
+            if self.ui != None:
+                self.ui.renderTabuleiro()
 
     def ui_reference(self, exUi):
         self.ui = exUi

@@ -1,6 +1,7 @@
 from concurrent import futures
 import logging
 import time
+from google.protobuf import message
 
 import grpc
 
@@ -12,6 +13,10 @@ class Chat(chat_pb2_grpc.ChatServicer):
     def __init__(self):
         self._history = []
         self.last_index = 1
+
+        self.refresh = []
+        self.refresh_index = 1
+
         self.turno = 0 # 0 = preto
         self.coresDisponiveis = [0 , 1] # 0 = preto e 1 = branco
         self.tabuleiro = self.make_tabuleiro()
@@ -30,12 +35,27 @@ class Chat(chat_pb2_grpc.ChatServicer):
                 message = self._history[0]
                 # yield - it's like endless return.
                 # The feature will return values over and over again when called yield.
-                time.sleep(0.02)
+                time.sleep(0.03)
                 self._history = []
                 self.last_index = 1
                 yield message
             # Add a little sleep to reduce the load on the server by constantly checking new messages
-            time.sleep(0.02)
+            time.sleep(0.05)
+
+    def RefreshTabuleiro(self, request_iterator, context):
+        print("[REFRESH TABULEIRO]")
+        while True:
+            # Send all messages from the queue of unsent
+            while self.refresh_index < 1:
+                message = self.refresh[0]
+                # yield - it's like endless return.
+                # The feature will return values over and over again when called yield.
+                time.sleep(0.03)
+                self.refresh = []
+                self.refresh_index = 1
+                yield message
+            # Add a little sleep to reduce the load on the server by constantly checking new messages
+            time.sleep(0.05)
 
     def CoresDisponiveis(self, request, context):
         print("[CORES DISPONOVEIS]")
@@ -80,6 +100,9 @@ class Chat(chat_pb2_grpc.ChatServicer):
         pos = request.pos
         color = request.cor
         self.tabuleiro[pos[0]][pos[1]] = color
+
+        self.refresh.append(chat_pb2.Empty())
+        self.refresh_index = 0
         return chat_pb2.Status(status=True)
 
     def make_tabuleiro(self):

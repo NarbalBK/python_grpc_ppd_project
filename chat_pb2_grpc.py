@@ -54,6 +54,11 @@ class ChatStub(object):
                 request_serializer=chat__pb2.Pos.SerializeToString,
                 response_deserializer=chat__pb2.Status.FromString,
                 )
+        self.RefreshTabuleiro = channel.unary_stream(
+                '/chat.Chat/RefreshTabuleiro',
+                request_serializer=chat__pb2.Empty.SerializeToString,
+                response_deserializer=chat__pb2.Empty.FromString,
+                )
 
 
 class ChatServicer(object):
@@ -107,6 +112,12 @@ class ChatServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def RefreshTabuleiro(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_ChatServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -149,6 +160,11 @@ def add_ChatServicer_to_server(servicer, server):
                     servicer.ChangeTabuleiro,
                     request_deserializer=chat__pb2.Pos.FromString,
                     response_serializer=chat__pb2.Status.SerializeToString,
+            ),
+            'RefreshTabuleiro': grpc.unary_stream_rpc_method_handler(
+                    servicer.RefreshTabuleiro,
+                    request_deserializer=chat__pb2.Empty.FromString,
+                    response_serializer=chat__pb2.Empty.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -293,5 +309,22 @@ class Chat(object):
         return grpc.experimental.unary_unary(request, target, '/chat.Chat/ChangeTabuleiro',
             chat__pb2.Pos.SerializeToString,
             chat__pb2.Status.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def RefreshTabuleiro(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(request, target, '/chat.Chat/RefreshTabuleiro',
+            chat__pb2.Empty.SerializeToString,
+            chat__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

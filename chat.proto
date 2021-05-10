@@ -11,6 +11,7 @@ service Chat {
   rpc TrocarDeTurno(Cor) returns (Status); 
   rpc TabuleiroAtual(Empty) returns (Tabuleiro);
   rpc ChangeTabuleiro(Pos) returns (Status);
+  rpc RefreshTabuleiro(Empty) returns (stream Empty);
 }
 
 message ChatMessage {
