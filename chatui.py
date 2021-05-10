@@ -72,7 +72,6 @@ class Tela:
                 tb_buttons_line[j].place(x=i*80, y=j*70)
             self.mtx_tb_buttons.append(tb_buttons_line)
             tb_buttons_line = []
-        print(self.mtx_tb_buttons)
         tabuleiro.pack(side=tk.RIGHT, fill=tk.BOTH)
 
         tabuleiro.pack() # * * * *
@@ -81,6 +80,7 @@ class Tela:
         self.chatController = chatController
 
         self.buttonActivation()
+        print(self.chatController.TabuleiroAtual())
 
     def tabuleiroActions(self, pos):
         print("[TABULEIRO ACTIONS]")

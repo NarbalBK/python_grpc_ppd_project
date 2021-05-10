@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\nchat.proto\x12\x04\x63hat\",\n\x0b\x43hatMessage\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07message\x18\x02 \x01(\t\"\x19\n\x05\x43ores\x12\x10\n\x04\x64\x61ta\x18\x01 \x03(\x05\x42\x02\x10\x01\"\x12\n\x03\x43or\x12\x0b\n\x03\x63or\x18\x01 \x01(\x05\"\x18\n\x06Status\x12\x0e\n\x06status\x18\x01 \x01(\x08\"\x07\n\x05\x45mpty2\x8f\x02\n\x04\x43hat\x12-\n\x0bSendMessage\x12\x11.chat.ChatMessage\x1a\x0b.chat.Empty\x12\x32\n\x0eReceiveMessage\x12\x0b.chat.Empty\x1a\x11.chat.ChatMessage0\x01\x12,\n\x10\x43oresDisponiveis\x12\x0b.chat.Empty\x1a\x0b.chat.Cores\x12&\n\x0b\x43hoiceColor\x12\t.chat.Cor\x1a\x0c.chat.Status\x12$\n\nTurnoAtual\x12\x0b.chat.Empty\x1a\t.chat.Cor\x12(\n\rTrocarDeTurno\x12\t.chat.Cor\x1a\x0c.chat.Statusb\x06proto3'
+  serialized_pb=b'\n\nchat.proto\x12\x04\x63hat\",\n\x0b\x43hatMessage\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07message\x18\x02 \x01(\t\"\x19\n\x05\x43ores\x12\x10\n\x04\x64\x61ta\x18\x01 \x03(\x05\x42\x02\x10\x01\"\x12\n\x03\x43or\x12\x0b\n\x03\x63or\x18\x01 \x01(\x05\"\x18\n\x06Status\x12\x0e\n\x06status\x18\x01 \x01(\x08\"\xa3\x01\n\tTabuleiro\x12\x11\n\x05line1\x18\x01 \x03(\x05\x42\x02\x10\x01\x12\x11\n\x05line2\x18\x02 \x03(\x05\x42\x02\x10\x01\x12\x11\n\x05line3\x18\x03 \x03(\x05\x42\x02\x10\x01\x12\x11\n\x05line4\x18\x04 \x03(\x05\x42\x02\x10\x01\x12\x11\n\x05line5\x18\x05 \x03(\x05\x42\x02\x10\x01\x12\x11\n\x05line6\x18\x06 \x03(\x05\x42\x02\x10\x01\x12\x11\n\x05line7\x18\x07 \x03(\x05\x42\x02\x10\x01\x12\x11\n\x05line8\x18\x08 \x03(\x05\x42\x02\x10\x01\"\x07\n\x05\x45mpty2\xbf\x02\n\x04\x43hat\x12-\n\x0bSendMessage\x12\x11.chat.ChatMessage\x1a\x0b.chat.Empty\x12\x32\n\x0eReceiveMessage\x12\x0b.chat.Empty\x1a\x11.chat.ChatMessage0\x01\x12,\n\x10\x43oresDisponiveis\x12\x0b.chat.Empty\x1a\x0b.chat.Cores\x12&\n\x0b\x43hoiceColor\x12\t.chat.Cor\x1a\x0c.chat.Status\x12$\n\nTurnoAtual\x12\x0b.chat.Empty\x1a\t.chat.Cor\x12(\n\rTrocarDeTurno\x12\t.chat.Cor\x1a\x0c.chat.Status\x12.\n\x0eTabuleiroAtual\x12\x0b.chat.Empty\x1a\x0f.chat.Tabuleirob\x06proto3'
 )
 
 
@@ -160,6 +160,87 @@ _STATUS = _descriptor.Descriptor(
 )
 
 
+_TABULEIRO = _descriptor.Descriptor(
+  name='Tabuleiro',
+  full_name='chat.Tabuleiro',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='line1', full_name='chat.Tabuleiro.line1', index=0,
+      number=1, type=5, cpp_type=1, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\020\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='line2', full_name='chat.Tabuleiro.line2', index=1,
+      number=2, type=5, cpp_type=1, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\020\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='line3', full_name='chat.Tabuleiro.line3', index=2,
+      number=3, type=5, cpp_type=1, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\020\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='line4', full_name='chat.Tabuleiro.line4', index=3,
+      number=4, type=5, cpp_type=1, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\020\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='line5', full_name='chat.Tabuleiro.line5', index=4,
+      number=5, type=5, cpp_type=1, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\020\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='line6', full_name='chat.Tabuleiro.line6', index=5,
+      number=6, type=5, cpp_type=1, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\020\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='line7', full_name='chat.Tabuleiro.line7', index=6,
+      number=7, type=5, cpp_type=1, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\020\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='line8', full_name='chat.Tabuleiro.line8', index=7,
+      number=8, type=5, cpp_type=1, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\020\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=140,
+  serialized_end=303,
+)
+
+
 _EMPTY = _descriptor.Descriptor(
   name='Empty',
   full_name='chat.Empty',
@@ -180,14 +261,15 @@ _EMPTY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=139,
-  serialized_end=146,
+  serialized_start=305,
+  serialized_end=312,
 )
 
 DESCRIPTOR.message_types_by_name['ChatMessage'] = _CHATMESSAGE
 DESCRIPTOR.message_types_by_name['Cores'] = _CORES
 DESCRIPTOR.message_types_by_name['Cor'] = _COR
 DESCRIPTOR.message_types_by_name['Status'] = _STATUS
+DESCRIPTOR.message_types_by_name['Tabuleiro'] = _TABULEIRO
 DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -219,6 +301,13 @@ Status = _reflection.GeneratedProtocolMessageType('Status', (_message.Message,),
   })
 _sym_db.RegisterMessage(Status)
 
+Tabuleiro = _reflection.GeneratedProtocolMessageType('Tabuleiro', (_message.Message,), {
+  'DESCRIPTOR' : _TABULEIRO,
+  '__module__' : 'chat_pb2'
+  # @@protoc_insertion_point(class_scope:chat.Tabuleiro)
+  })
+_sym_db.RegisterMessage(Tabuleiro)
+
 Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), {
   'DESCRIPTOR' : _EMPTY,
   '__module__' : 'chat_pb2'
@@ -228,6 +317,14 @@ _sym_db.RegisterMessage(Empty)
 
 
 _CORES.fields_by_name['data']._options = None
+_TABULEIRO.fields_by_name['line1']._options = None
+_TABULEIRO.fields_by_name['line2']._options = None
+_TABULEIRO.fields_by_name['line3']._options = None
+_TABULEIRO.fields_by_name['line4']._options = None
+_TABULEIRO.fields_by_name['line5']._options = None
+_TABULEIRO.fields_by_name['line6']._options = None
+_TABULEIRO.fields_by_name['line7']._options = None
+_TABULEIRO.fields_by_name['line8']._options = None
 
 _CHAT = _descriptor.ServiceDescriptor(
   name='Chat',
@@ -236,8 +333,8 @@ _CHAT = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=149,
-  serialized_end=420,
+  serialized_start=315,
+  serialized_end=634,
   methods=[
   _descriptor.MethodDescriptor(
     name='SendMessage',
@@ -296,6 +393,16 @@ _CHAT = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_COR,
     output_type=_STATUS,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='TabuleiroAtual',
+    full_name='chat.Chat.TabuleiroAtual',
+    index=6,
+    containing_service=None,
+    input_type=_EMPTY,
+    output_type=_TABULEIRO,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),

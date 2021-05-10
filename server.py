@@ -9,12 +9,12 @@ import chat_pb2_grpc
 
 class Chat(chat_pb2_grpc.ChatServicer):
 
-    coresDisponiveis = [0 , 1] # 0 = preto e 1 = branco
-    turno = 0 # 0 = preto
-
     def __init__(self):
         self._history = []
         self.last_index = 1
+        self.turno = 0 # 0 = preto
+        self.coresDisponiveis = [0 , 1] # 0 = preto e 1 = branco
+        self.tabuleiro = self.make_tabuleiro()
 
     def SendMessage(self, request, context):
         print("[SEND MESSAGE]")
@@ -62,6 +62,32 @@ class Chat(chat_pb2_grpc.ChatServicer):
                 self.turno = 0
             return chat_pb2.Status(status=True)
         return chat_pb2.Status(status=False)
+
+    def TabuleiroAtual(self, request, context):
+        print("[TABULEIRO ATUAL]")
+        return chat_pb2.Tabuleiro(
+            line1=self.tabuleiro[0],
+            line2=self.tabuleiro[1],
+            line3=self.tabuleiro[2],
+            line4=self.tabuleiro[3],
+            line5=self.tabuleiro[4],
+            line6=self.tabuleiro[5],
+            line7=self.tabuleiro[6],
+            line8=self.tabuleiro[7])
+
+    def make_tabuleiro(self):
+        mtx_tabuleiro = []
+        tb_line = []
+        for i in range(8):
+            for j in range(8):
+                tb_line.append(-1)
+            mtx_tabuleiro.append(tb_line)
+            tb_line = []
+        mtx_tabuleiro[4][4] = 0
+        mtx_tabuleiro[4][5] = 1
+        mtx_tabuleiro[5][4] = 0
+        mtx_tabuleiro[5][5] = 1
+        return mtx_tabuleiro
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))

@@ -57,6 +57,20 @@ class ChatClient:
         response = self.stub.TrocarDeTurno(chat_pb2.Cor(cor=color))
         return response.status
 
+    def TabuleiroAtual(self):
+        print("[TABULEIRO ATUAL]")
+        response = self.stub.TabuleiroAtual(chat_pb2.Empty())
+        tabuleiro = [
+            response.line1,
+            response.line2, 
+            response.line3, 
+            response.line4, 
+            response.line5, 
+            response.line6, 
+            response.line7, 
+            response.line8]
+        return tabuleiro
+
     def receive_messages(self):
         if not self.stub:
             return None
