@@ -1,6 +1,6 @@
-from logging import disable
 import tkinter as tk
 from tkmacosx import Button
+from functools import partial
 
 class Tela:
 
@@ -61,20 +61,30 @@ class Tela:
         chat_frame.pack(side=tk.LEFT, fill=tk.BOTH)
         chat_frame.pack()  # * * * *
 
-        imgBlank = tk.PhotoImage(file="./img/semBolinha.gif")
+        self.imgBlank = tk.PhotoImage(file="./img/semBolinha.gif")
 
         tabuleiro = tk.Frame(master, width=1000, height=800) # * * * *
+        self.mtx_tb_buttons = []
+        tb_buttons_line = []
         for i in range(8):
             for j in range(8):
-                bt = Button(tabuleiro, bg="gray", fg="gray", image=imgBlank).place(x=i*80, y=j*70)
+                tb_buttons_line.append(Button(tabuleiro, bg="gray", fg="gray", image=self.imgBlank, command=partial(self.tabuleiroActions, [i, j])))
+                tb_buttons_line[j].place(x=i*80, y=j*70)
+            self.mtx_tb_buttons.append(tb_buttons_line)
+            tb_buttons_line = []
+        print(self.mtx_tb_buttons)
         tabuleiro.pack(side=tk.RIGHT, fill=tk.BOTH)
 
         tabuleiro.pack() # * * * *
-
+            
         self.master = master
         self.chatController = chatController
 
         self.buttonActivation()
+
+    def tabuleiroActions(self, pos):
+        print("[TABULEIRO ACTIONS]")
+        print(pos)
 
     def renderChatMessages(self, text):
         self.message_list.insert(tk.END, text)
@@ -130,7 +140,6 @@ class Tela:
         response = self.chatController.TrocarDeTurno(self.corDoJogador)
         if response:
             print(self.TurnoAtual())
-
 
     def empty(self, event=None):
         pass
