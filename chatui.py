@@ -1,3 +1,4 @@
+from os import pardir
 import tkinter as tk
 from tkmacosx import Button
 from functools import partial
@@ -60,6 +61,20 @@ class Tela:
         bt_troca.pack(pady=10)
         bt_troca.pack()
 
+        self.lbl_turno_atual = tk.Label(input_menu, text="TURNO ATUAL: JOGADOR PRETO")
+        self.lbl_turno_atual.pack(pady=10)
+        self.lbl_turno_atual.pack()
+
+        numero_pecas = tk.Label(input_menu) # * * 
+        self.lbl_pecas_pretas = tk.Label(numero_pecas, text="PRETAS: 2")
+        self.lbl_pecas_pretas.pack(side=tk.LEFT, fill=tk.BOTH)
+        self.lbl_pecas_pretas.pack()
+
+        self.lbl_pecas_brancas = tk.Label(numero_pecas, text="BRANCAS: 2")
+        self.lbl_pecas_brancas.pack(side=tk.RIGHT, fill=tk.BOTH)
+        self.lbl_pecas_brancas.pack()
+        numero_pecas.pack() # * * 
+
         input_menu.pack(pady=10)
         input_menu.pack()# * * *
 
@@ -120,6 +135,9 @@ class Tela:
                     self.mtx_tb_buttons[i][j]["image"] = self.imgWhite
                     self.qtdBrancas += 1
 
+        self.lbl_pecas_brancas["text"] = "BRANCAS: {}".format(self.qtdBrancas)
+        self.lbl_pecas_pretas["text"] = "PRETAS: {}".format(self.qtdPretas)
+
     def send(self, event=None):
         print("send")
         self.chatController.send_messages(self.my_msg.get())
@@ -170,7 +188,11 @@ class Tela:
             return self.empty()
         response = self.chatController.TrocarDeTurno(self.corDoJogador)
         if response:
-            print(self.TurnoAtual())
+            turnoAtual = self.TurnoAtual()
+            if turnoAtual == 0:
+                self.lbl_turno_atual["text"] = "TURNO ATUAL: JOGADOR PRETO"
+            elif turnoAtual == 1:
+                self.lbl_turno_atual["text"] = "TURNO ATUAL: JOGADOR BRANCO"
 
     def empty(self, event=None):
         pass
