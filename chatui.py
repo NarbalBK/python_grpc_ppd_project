@@ -5,6 +5,8 @@ from functools import partial
 class Tela:
 
     corDoJogador = None
+    qtdBrancas = 0
+    qtdPretas = 0
 
     def __init__(self, master, chatController):
         master.title("putaria title")
@@ -62,13 +64,15 @@ class Tela:
         chat_frame.pack()  # * * * *
 
         self.imgBlank = tk.PhotoImage(file="./img/semBolinha.gif")
+        self.imgBlack = tk.PhotoImage(file="./img/preto.gif")
+        self.imgWhite = tk.PhotoImage(file="./img/branco.gif")
 
         tabuleiro = tk.Frame(master, width=1000, height=800) # * * * *
         self.mtx_tb_buttons = []
         tb_buttons_line = []
         for i in range(8):
             for j in range(8):
-                tb_buttons_line.append(Button(tabuleiro, bg="gray", fg="gray", image=self.imgBlank, command=partial(self.tabuleiroActions, [i, j])))
+                tb_buttons_line.append(Button(tabuleiro, bg="gray", fg="gray", image=self.imgBlank, command=partial(self.tabuleiroActions, [j, i])))
                 tb_buttons_line[j].place(x=i*80, y=j*70)
             self.mtx_tb_buttons.append(tb_buttons_line)
             tb_buttons_line = []
@@ -80,14 +84,34 @@ class Tela:
         self.chatController = chatController
 
         self.buttonActivation()
-        print(self.chatController.TabuleiroAtual())
+        self.renderTabuleiro()
 
     def tabuleiroActions(self, pos):
         print("[TABULEIRO ACTIONS]")
         print(pos)
 
+    def TabuleiroAtual(self):
+        print("[UI TABULEIRO ATUAL]")
+        return self.chatController.TabuleiroAtual()
+
     def renderChatMessages(self, text):
         self.message_list.insert(tk.END, text)
+
+    def renderTabuleiro(self):
+        print("[UI RENDER TABULEIRO]")
+        self.qtdBrancas = 0
+        self.qtdPretas = 0
+        tabuleiro = self.TabuleiroAtual()
+        for i in range(8):
+            for j in range(8):
+                if tabuleiro[i][j] == -1:
+                    self.mtx_tb_buttons[i][j]["image"] = self.imgBlank
+                elif tabuleiro[i][j] == 0:
+                    self.mtx_tb_buttons[i][j]["image"] = self.imgBlack
+                    self.qtdPretas += 1
+                elif tabuleiro[i][j] == 1:
+                    self.mtx_tb_buttons[i][j]["image"] = self.imgWhite
+                    self.qtdBrancas += 1
 
     def send(self, event=None):
         print("send")

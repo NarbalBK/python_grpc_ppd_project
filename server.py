@@ -83,10 +83,10 @@ class Chat(chat_pb2_grpc.ChatServicer):
                 tb_line.append(-1)
             mtx_tabuleiro.append(tb_line)
             tb_line = []
-        mtx_tabuleiro[4][4] = 0
-        mtx_tabuleiro[4][5] = 1
-        mtx_tabuleiro[5][4] = 0
-        mtx_tabuleiro[5][5] = 1
+        mtx_tabuleiro[3][3] = 1
+        mtx_tabuleiro[4][3] = 0
+        mtx_tabuleiro[3][4] = 0
+        mtx_tabuleiro[4][4] = 1
         return mtx_tabuleiro
 
 def serve():
